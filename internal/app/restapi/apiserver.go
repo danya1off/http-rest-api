@@ -42,7 +42,7 @@ func (s APIServer) Start() error {
 }
 
 func (s APIServer) configureRouter() {
-	s.router.HandleFunc("/hello", s.helloHandler)
+	s.router.HandleFunc("/hello", s.helloHandler())
 }
 
 func (s APIServer) configureDB() error {
@@ -62,10 +62,12 @@ func (s APIServer) configureUserRepository() {
 	s.userDAO = dao
 }
 
-func (s APIServer) helloHandler(w http.ResponseWriter, r *http.Request) {
-	_, err := s.userDAO.FindByEmail("")
-	if err != nil {
-		s.logger.WithError(err).Fatal("Error!")
+func (s APIServer) helloHandler() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_, err := s.userDAO.FindByEmail("")
+		if err != nil {
+			s.logger.WithError(err).Fatal("Error!")
+		}
+		io.WriteString(w, "Hello")
 	}
-	io.WriteString(w, "Hello")
 }
