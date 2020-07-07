@@ -10,7 +10,7 @@ import (
 )
 
 func TestApiServer_HelloHandler(t *testing.T) {
-	api := New(config.NewConfig())
+	api := New(config.New())
 	rec := httptest.NewRecorder()
 	req, _ := http.NewRequest(http.MethodGet, "/hello", nil)
 	api.helloHandler().ServeHTTP(rec, req)

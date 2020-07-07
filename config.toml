@@ -1,0 +1,5 @@
+bind_addr = ":8080"
+log_level = "debug"
+
+[dbconfig]
+db_url = "postgres://whcdlpcc:vHV7yITyvIK8JgqMRp70jtLluYpZGeZ9@dumbo.db.elephantsql.com:5432/whcdlpcc"
